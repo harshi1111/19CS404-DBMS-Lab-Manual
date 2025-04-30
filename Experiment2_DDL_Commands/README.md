@@ -105,123 +105,163 @@ CREATE TABLE Table_Name (
 
 **Question 1**
 --
--- Paste Question 1 here
+![image](https://github.com/user-attachments/assets/ae1dcbfe-73ee-4ff7-8cfd-b8eafb82b25e)
+
 
 ```sql
--- Paste your SQL code below for Question 1
+ALTER  TABLE employee 
+RENAME COLUMN id TO employee_id;
 ```
 
 **Output:**
 
-![Output1](output.png)
+![image](https://github.com/user-attachments/assets/ae106520-faa4-4e95-9e35-c82414ef9830)
+
 
 **Question 2**
 ---
--- Paste Question 2 here
+![image](https://github.com/user-attachments/assets/50e0f82d-5d35-42f6-bbdd-69d55dc661de)
+
 
 ```sql
--- Paste your SQL code below for Question 2
+CREATE TABLE orders (ord_id TEXT CHECK(LENGTH(ord_id)=4) NOT NULL,
+item_id TEXT NOT NULL, ord_date DATE, ord_qty INTEGER, cost INTEGER,
+PRIMARY KEY (item_id , ord_date))
 ```
 
 **Output:**
 
-![Output2](output.png)
+![image](https://github.com/user-attachments/assets/68707e2a-0122-4b8c-8f1a-88e6774ee7dc)
+
 
 **Question 3**
 ---
--- Paste Question 3 here
+![image](https://github.com/user-attachments/assets/7e31d9df-a099-4b5f-b040-5f461b4a16e4)
+
 
 ```sql
--- Paste your SQL code below for Question 3
+CREATE TABLE Orders (OrderID INTEGER PRIMARY KEY,
+OrderDate DATE NOT NULL,CustomerID INTEGER,
+FOREIGN KEY (CustomerID)  REFERENCES Customers(CustomerID));
 ```
 
 **Output:**
 
-![Output3](output.png)
+![image](https://github.com/user-attachments/assets/af042f16-6c04-4663-bd56-98f0aca1869e)
+
 
 **Question 4**
 ---
--- Paste Question 4 here
+![image](https://github.com/user-attachments/assets/5612d666-80c9-494b-b4fc-8b8e660b9bc2)
+
 
 ```sql
--- Paste your SQL code below for Question 4
+INSERT INTO Products ( Name, Category, Price, Stock)
+VALUES ( 'Smartphone', 'Electronics', 800, 150),
+ ('Headphones','Accessories',200,300);
 ```
 
 **Output:**
 
-![Output4](output.png)
+![image](https://github.com/user-attachments/assets/e912d571-97b4-4831-928f-fb2a0341fda0)
+
 
 **Question 5**
 ---
--- Paste Question 5 here
+![image](https://github.com/user-attachments/assets/e8fddf2f-51e4-47e8-90ff-84b9131182d6)
+
+
 
 ```sql
--- Paste your SQL code below for Question 5
+CREATE TABLE Products (ProductID INTEGER PRIMARY KEY, ProductName TEXT UNIQUE NOT NULL,
+Price REAL CHECK(Price > 0), StockQuantity INTEGER check (StockQuantity >= 0));
 ```
 
 **Output:**
 
-![Output5](output.png)
+![image](https://github.com/user-attachments/assets/c180ab29-bbd6-495d-884b-58328c93653c)
+
 
 **Question 6**
 ---
--- Paste Question 6 here
+![image](https://github.com/user-attachments/assets/77591bd0-fe38-49b8-93cd-4fba0e795e71)
+
 
 ```sql
--- Paste your SQL code below for Question 6
+ALTER TABLE Companies 
+RENAME COLUMN name TO first_name;
+ALTER TABLE Companies
+ADD  mobilenumb number; 
+ALTER TABLE Companies
+ADD DOB Date;
+ALTER TABLE Companies
+ADD State varchar(30);
 ```
 
 **Output:**
 
-![Output6](output.png)
+![image](https://github.com/user-attachments/assets/e2f0f2d0-608b-4c66-8fbe-69662a566c22)
+
 
 **Question 7**
 ---
--- Paste Question 7 here
+![image](https://github.com/user-attachments/assets/28fd154c-3619-4275-99a2-a25ef438a476)
+
 
 ```sql
--- Paste your SQL code below for Question 7
+INSERT INTO Customers (CustomerID,Name, Address, Email )
+SELECT CustomerID,Name, Address, Email FROM Old_customers;
 ```
 
 **Output:**
 
-![Output7](output.png)
+![image](https://github.com/user-attachments/assets/b97e2053-5136-4538-8542-cba425440422)
+
 
 **Question 8**
 ---
--- Paste Question 8 here
+![image](https://github.com/user-attachments/assets/e0da1365-dcec-4157-9cf9-9c25bce2d842)
+
 
 ```sql
--- Paste your SQL code below for Question 8
+CREATE TABLE Reviews (ReviewID INTEGER, ProductID INTEGER , Rating REAL, ReviewText TEXT);
 ```
 
 **Output:**
 
-![Output8](output.png)
+![image](https://github.com/user-attachments/assets/cdee7523-0e7d-439c-9b15-4bf02cfaf70b)
+
 
 **Question 9**
 ---
--- Paste Question 9 here
+![image](https://github.com/user-attachments/assets/670fc782-7ef8-4a65-83e0-ad04be04a8cd)
+
 
 ```sql
--- Paste your SQL code below for Question 9
+CREATE TABLE Shipments(ShipmentID INTEGER PRIMARY KEY, ShipmentDate DATE ,
+SupplierID INTEGER , OrderID  INTEGER,  FOREIGN KEY (SupplierID) REFERENCES Suppliers(SupplierID),
+FOREIGN KEY (OrderID) REFERENCES Orders(OrderID));
 ```
 
 **Output:**
 
-![Output9](output.png)
+![image](https://github.com/user-attachments/assets/350e0b2f-7259-4702-8600-b97a41ba88d2)
+
 
 **Question 10**
 ---
--- Paste Question 10 here
+![image](https://github.com/user-attachments/assets/0f76305d-30e0-4f11-97cb-f6cd51330de6)
+
 
 ```sql
--- Paste your SQL code below for Question 10
+INSERT INTO Employee (EmployeeID,Name,Position)
+VALUES (4,'Emily White','Analyst');
 ```
 
 **Output:**
 
-![Output10](output.png)
+![image](https://github.com/user-attachments/assets/a5c25156-68e7-4bda-ab00-304a7fb1f903)
+
 
 
 ## RESULT
