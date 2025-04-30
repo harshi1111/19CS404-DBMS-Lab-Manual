@@ -45,28 +45,88 @@ Design a database for patient management, appointments, medical records, and bil
    - Why you chose the entities and relationships.
    - How you modeled prerequisites or billing.
 
-# ER Diagram Submission - Student Name
+---
+
+# ER Diagram Submission - HARSHITHA V
 
 ## Scenario Chosen:
-University / Hospital (choose one)
+Hospital 
 
 ## ER Diagram:
-![ER Diagram](er_diagram.png)
+
+![image](https://github.com/user-attachments/assets/b0359b5a-796f-472c-a822-538a72d30a98)
+
+---
 
 ## Entities and Attributes:
-- Entity1: Attributes
-- Entity2: Attributes
-...
+
+- PATIENT:
+Attributes - PATIENT ID, FULL NAME, DATE OF BIRTH, GENDER, ADDRESS, EMAIL, PHONE NUMBER, INSURANCE DETAILS
+
+- APPOINTMENT:
+Attributes - APPOINTMENT ID, DATE, TIME, REASON, NOTES
+
+- DOCTOR:
+Attributes - DOCTOR ID, NAME, SPECIALIZATION, PHONE NUMBER, EMAIL, WORK SCHEDULE
+
+- DEPARTMENT:
+Attributes - DEPARTMENT ID, DEPARTMENT NAME, DEPARTMENT HEAD
+
+- MEDICAL REPORT:
+Attributes - MEDICAL DIAGNOSIS ID, DIAGNOSIS, TREATMENT, PRESCRIBED MEDICATION, TEST RESULTS
+
+- BILLING:
+Attributes - BILLING ID, AMOUNT, PAYMENT METHOD, PAYMENT STATUS
+
+---
 
 ## Relationships and Constraints:
-- Relationship1 (Cardinality, Participation)
-- Relationship2 (Cardinality, Participation)
-...
+
+- Books (1:N, PATIENT to APPOINTMENT — Partial Participation of PATIENT, Total Participation of APPOINTMENT)
+
+- Handles (1:N, DOCTOR to APPOINTMENT — Partial Participation of DOCTOR, Total Participation of APPOINTMENT)
+
+- Belongs To (N:1, DOCTOR to DEPARTMENT — Partial Participation from both DOCTOR and DEPARTMENT)
+
+- Produces (1:1, APPOINTMENT to MEDICAL REPORT — Partial Participation of APPOINTMENT, Total Participation of MEDICAL REPORT)
+
+- Generates (1:1, APPOINTMENT to BILLING — Partial Participation of APPOINTMENT, Total Participation of BILLING)
+
+---
 
 ## Extension (Prerequisite / Billing):
-- Explain how you modeled prerequisites or billing.
+
+- Billing is modeled as a separate entity with a 1:1 relationship to Appointment using the Generates relationship. This ensures that every appointment produces exactly one billing record, which simplifies financial tracking, enables integration with insurance systems, and allows for easy auditing of patient transactions.
+- Attributes like Amount, Payment Method, and Payment Status help maintain clear payment trails. This model supports future expansion such as:
+
+  - Linking billing to insurance claims
+
+  - Generating automated payment reminders
+
+  - Adding multi-mode payment histories (cash, online, etc.)
+
+---
 
 ## Design Choices:
-Brief explanation of why you chose certain entities, relationships, and assumptions
+
+- Entity Selection: Entities like PATIENT, DOCTOR, APPOINTMENT, BILLING, and MEDICAL REPORT were chosen based on essential components of a clinical/hospital management system.
+- Normalization: Information is divided into logical, minimal redundancy tables — for example, separating BILLING and MEDICAL REPORT ensures both can grow independently.
+  - Relationship Modeling:
+
+- Books and Handles reflect real-world workflows: patients book appointments; doctors handle them.
+- Generates and Produces maintain 1:1 integrity — one appointment equals one bill and one report.
+  
+  - Participation Constraints:
+- Total participation from APPOINTMENT to BILLING and MEDICAL REPORT ensures data completeness.
+- Scalability: The DEPARTMENT entity allows the hospital to scale across units like Cardiology, Neurology, etc., and organizes doctors efficiently.
+
+  - Assumptions:
+- A doctor belongs to only one department.
+- A patient can have multiple appointments but one appointment belongs to one patient.
+
+- Each appointment will always result in billing and a medical report.
+
+---
 
 ## RESULT
+Thhus, successfully understood and applied the concepts of ER modeling by creating an ER diagram for a real-world application.
