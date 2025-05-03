@@ -80,6 +80,64 @@ END;
 The program should display the employee details or an error message.
 
 ---
+**Program:** 
+```
+-- Step 1: Create the employees table (drop if exists)
+DROP TABLE IF EXISTS employees;
+
+CREATE TABLE employees (
+    emp_id INT,
+    emp_name VARCHAR(50),
+    designation VARCHAR(50)
+);
+
+-- Step 2: Insert sample data
+INSERT INTO employees VALUES 
+(101, 'Alice Johnson', 'Developer'),
+(102, 'Bob Smith', 'Manager'),
+(103, 'Cathy Brown', 'Analyst');
+
+-- Step 3: Stored Procedure with Cursor
+DELIMITER $$
+
+CREATE PROCEDURE fetch_employees()
+BEGIN
+    DECLARE done INT DEFAULT 0;
+    DECLARE v_emp_name VARCHAR(50);
+    DECLARE v_designation VARCHAR(50);
+
+    -- Declare the cursor
+    DECLARE emp_cursor CURSOR FOR 
+        SELECT emp_name, designation FROM employees;
+
+    -- Declare continue handler
+    DECLARE CONTINUE HANDLER FOR NOT FOUND SET done = 1;
+
+    -- Open and fetch from the cursor
+    OPEN emp_cursor;
+
+    read_loop: LOOP
+        FETCH emp_cursor INTO v_emp_name, v_designation;
+        IF done THEN
+            LEAVE read_loop;
+        END IF;
+        SELECT CONCAT('Name: ', v_emp_name, ', Designation: ', v_designation) AS employee_info;
+    END LOOP;
+
+    CLOSE emp_cursor;
+END$$
+
+DELIMITER ;
+
+-- Step 4: Call the procedure
+CALL fetch_employees();
+
+```
+**Program Output:** 
+
+![image](https://github.com/user-attachments/assets/4afde33e-c81f-4714-bade-c5be2842b095)
+
+---
 
 ### **Question 2: Parameterized Cursor with Exception Handling**
 
@@ -97,6 +155,81 @@ The program should display the employee details or an error message.
 
 **Output:**  
 The program should display the employee details within the specified salary range or an error message if no data is found.
+
+---
+**Program:**  
+```
+-- Step 1: Create the employees table
+CREATE TABLE employees (
+    emp_id INT PRIMARY KEY AUTO_INCREMENT,
+    emp_name VARCHAR(100),
+    designation VARCHAR(100),
+    salary DECIMAL(10, 2)
+);
+
+-- Step 2: Insert sample data into the employees table
+INSERT INTO employees (emp_name, designation, salary) 
+VALUES
+('Alice Johnson', 'Developer', 50000.00),
+('Bob Smith', 'Manager', 70000.00),
+('Cathy Brown', 'Analyst', 60000.00),
+('David Williams', 'Developer', 45000.00),
+('Eva Clark', 'Manager', 80000.00);
+
+-- Step 3: Create a stored procedure to use a cursor with parameters
+DELIMITER $$
+
+CREATE PROCEDURE GetEmployeesBySalaryRange(IN min_salary DECIMAL(10, 2), IN max_salary DECIMAL(10, 2))
+BEGIN
+    -- Declare variables for employee details
+    DECLARE v_emp_name VARCHAR(100);
+    DECLARE v_designation VARCHAR(100);
+    DECLARE v_salary DECIMAL(10, 2);
+    
+    -- Declare the cursor to fetch employees within the salary range
+    DECLARE emp_cursor CURSOR FOR
+        SELECT emp_name, designation, salary
+        FROM employees
+        WHERE salary BETWEEN min_salary AND max_salary;
+
+    -- Declare a handler for when no data is found
+    DECLARE CONTINUE HANDLER FOR NOT FOUND SET v_emp_name = NULL;
+
+    -- Open the cursor
+    OPEN emp_cursor;
+
+    -- Fetch employee details
+    FETCH_LOOP: LOOP
+        FETCH emp_cursor INTO v_emp_name, v_designation, v_salary;
+        
+        -- If no more rows are found, exit the loop
+        IF v_emp_name IS NULL THEN
+            LEAVE FETCH_LOOP;
+        END IF;
+
+        -- Display the employee details
+        SELECT CONCAT('Employee Name: ', v_emp_name, ', Designation: ', v_designation, ', Salary: ', v_salary) AS employee_info;
+    END LOOP;
+
+    -- Close the cursor
+    CLOSE emp_cursor;
+
+    -- Check if no rows were fetched
+    IF v_emp_name IS NULL THEN
+        SELECT 'No employees found in the specified salary range.' AS error_message;
+    END IF;
+END $$
+
+-- Step 4: Set the delimiter back to default
+DELIMITER ;
+
+-- Step 5: Call the stored procedure with a salary range
+CALL GetEmployeesBySalaryRange(55000, 75000);
+
+```
+**Program Output:**  
+
+![image](https://github.com/user-attachments/assets/a0beb9c8-9ea9-4be0-aa2a-a8c4a5c7158b)
 
 ---
 
