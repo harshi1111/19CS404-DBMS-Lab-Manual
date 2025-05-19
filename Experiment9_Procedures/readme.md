@@ -63,6 +63,19 @@ Key Differences:
 **Expected Output:**  
 Square of 6 is 36
 
+**Program**
+```
+CREATE OR REPLACE PROCEDURE find_square (num IN NUMBER)
+IS
+ result NUMBER;
+BEGIN
+ result := num * num;
+ DBMS_OUTPUT.PUT_LINE('Square of ' || num || ' is ' || result);
+END;
+```
+![image](https://github.com/user-attachments/assets/cef5d881-2ecf-4aa1-b676-0f78b85203e5)
+
+
 ---
 
 ## 2. Write a PL/SQL Function to Return the Factorial of a Number
@@ -77,6 +90,23 @@ Square of 6 is 36
 **Expected Output:**  
 Factorial of 5 is 120
 
+**Program**
+
+```
+CREATE OR REPLACE FUNCTION get_factorial (n IN NUMBER)
+RETURN NUMBER
+IS
+   fact NUMBER := 1;
+BEGIN
+   FOR i IN 1..n LOOP
+      fact := fact * i;
+   END LOOP;
+   RETURN fact;
+END;
+```
+
+![image](https://github.com/user-attachments/assets/45ef31c4-9c19-4d5e-8fb8-1f3690364d8d)
+
 ---
 
 ## 3. Write a PL/SQL Procedure to Check Whether a Number is Even or Odd
@@ -89,6 +119,27 @@ Factorial of 5 is 120
 
 **Expected Output:**  
 12 is Even
+
+**Program**
+
+```
+CREATE OR REPLACE PROCEDURE check_even_odd(p_number IN NUMBER) IS
+BEGIN
+  
+   IF MOD(p_number, 2) = 0 THEN
+      DBMS_OUTPUT.PUT_LINE(p_number || ' is Even');
+   ELSE
+      DBMS_OUTPUT.PUT_LINE(p_number || ' is Odd');
+   END IF;
+END;
+/
+
+BEGIN
+   check_even_odd(12);  
+END;
+/
+```
+![image](https://github.com/user-attachments/assets/12d3353e-24b9-4ad5-bb05-7faaffb756f7)
 
 ---
 
@@ -103,6 +154,24 @@ Factorial of 5 is 120
 
 **Expected Output:**  
 Reversed number of 1234 is 4321
+
+**Program**
+
+```
+CREATE OR REPLACE FUNCTION reverse_number (n IN NUMBER)
+RETURN NUMBER
+IS
+   rev NUMBER := 0;
+   temp NUMBER := n;
+BEGIN
+   WHILE temp > 0 LOOP
+      rev := rev * 10 + MOD(temp, 10);
+      temp := TRUNC(temp / 10);
+   END LOOP;
+   RETURN rev;
+END;
+```
+![image](https://github.com/user-attachments/assets/16a74d72-ba9b-4581-a530-320e8497bacc)
 
 ---
 
@@ -122,5 +191,20 @@ Multiplication table of 5:
 ...  
 5 x 10 = 50
 
+**Program**
+
+```
+CREATE OR REPLACE PROCEDURE print_table (n IN NUMBER)
+IS
+BEGIN
+   DBMS_OUTPUT.PUT_LINE('Multiplication table of ' || n || ':');
+   FOR i IN 1..10 LOOP
+      DBMS_OUTPUT.PUT_LINE(n || ' x ' || i || ' = ' || (n * i));
+   END LOOP;
+END;
+```
+![image](https://github.com/user-attachments/assets/afc7f6db-5114-4fcc-9071-79c23eb41876)
+
+---
 ## RESULT
 Thus, the PL/SQL programs using procedures and functions were written, compiled, and executed successfully.
