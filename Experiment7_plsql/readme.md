@@ -46,8 +46,7 @@ BEGIN
    END IF;
 END;
 /
-```
-**Expected Output:**  
+``` 
 
 ![image](https://github.com/user-attachments/assets/0d155676-a923-47d6-ae66-39da3dd0c30b)
 
@@ -75,7 +74,6 @@ BEGIN
 END;
 /
 ```
-**Expected Output:**  
 
 ![image](https://github.com/user-attachments/assets/084739d6-94cb-48db-abf7-0e3dab7468a2)
 
@@ -104,7 +102,7 @@ BEGIN
 END;
 /
 ```
-**Expected Output:**  
+
 
 ![image](https://github.com/user-attachments/assets/42a9c121-6570-41cc-b3ca-6e1ede62b80f)
 
@@ -134,7 +132,6 @@ BEGIN
 END;
 /
 ```
-**Expected Output:**  
 
 ![image](https://github.com/user-attachments/assets/89a67f39-2214-4edf-b686-93b2ff7b513a)
 
@@ -166,7 +163,6 @@ BEGIN
 END;
 /
 ```
-**Expected Output:**  
 
 ![image](https://github.com/user-attachments/assets/51f2651a-7700-4a7a-b368-afaad2e61cae)
 
